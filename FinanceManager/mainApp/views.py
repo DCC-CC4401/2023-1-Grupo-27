@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
-
+from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     template = loader.get_template('./index.html')
@@ -24,7 +24,24 @@ def register_user(request):
         #Crear el nuevo usuario
         #user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo, pronombre=pronombre)
         user = User.objects.create_user(username=nombre, password=contraseña)
-
-
+        login(request,user)
         #Redireccionar la página /index
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/mainApp')
+
+
+def login_user(request):
+    if request.method == 'GET':
+        return render(request,"./login.html")
+    if request.method == 'POST':
+        username = request.POST['username'] # Obtenemos nombre de usuario
+        contraseña = request.POST['contraseña'] # Obtenemos su contraseña
+        usuario = authenticate(username=username,password=contraseña) # Autenticamos el usuario
+        if usuario is not None: # Si la respuesta de la autenticacion no fue None, el usuario existe y puede entrar
+            login(request,usuario)
+            return HttpResponseRedirect('/mainApp')
+        else: # Caso contrario debe registrarse
+            return HttpResponseRedirect('/login')
+        
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect('./mainApp')

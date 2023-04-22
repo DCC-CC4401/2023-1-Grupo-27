@@ -1,0 +1,14 @@
+.box {
+    background-color: lightblue;
+    border: 2px solid blue;
+    min-height: 50px;
+    font-size: 2rem;
+}
+
+.col {
+    border: 1px solid red;
+}
+
+#miniBox{
+    border: 2px solid blue;
+}

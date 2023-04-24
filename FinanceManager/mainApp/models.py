@@ -28,3 +28,17 @@ class RealizaTransaccion(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['idUsuario', 'idTransaccion'], name='unique_realizatransaccion')
         ]
+
+# 
+# class Transaccion(models.Model):  # Django añade un id por defecto
+#     nombre = models.CharField(max_length=250)  # un varchar
+#     tipos = [('Ingreso','Ingreso'),('Egreso','Egreso')] 
+#     tipo = models.CharField(max_length=8,choices=tipos) # Tipo = ingreso/egreso
+#     categoria = models.CharField(max_length=250, default=None, null=True) # Categoria que es null por defecto
+#     monto = models.IntegerField() # Un monto requerido de asignar
+#     fecha = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))  # Un date de cuando se crea una transaccion
+#     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+#     def __str__(self): # Como se mostrara al imprimir
+#         return f'Usuario: {self.usuario}, Transaccion: {self.nombre} ({self.categoria}): {self.monto}'
+# 

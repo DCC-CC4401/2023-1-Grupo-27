@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="">Home</a>
+                            <a class="nav-link active" aria-current="page" href="../mainApp">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -46,18 +46,9 @@
                     <!-- Login buttons -->
                     
                     <ul class="navbar-nav">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item p-1">
-                            <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item p-1">
-                            <a class="btn btn-primary" href="{% url 'register_user' %}" role="button">Register</a>
-                        </li>
                         <li class="nav-item p-1">
                             <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
                         </li>
-                        {% endif %}
                     </ul>
                 </div>
             </div>

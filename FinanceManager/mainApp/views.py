@@ -1,3 +1,5 @@
+from pyexpat.errors import messages
+from django.db import IntegrityError
 from mainApp.models import User
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -23,10 +25,14 @@ def register_user(request):
 
         #Crear el nuevo usuario
         #user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo, pronombre=pronombre)
-        user = User.objects.create_user(username=nombre, password=contraseña)
-        login(request,user)
-        #Redireccionar la página /index
-        return HttpResponseRedirect('/mainApp')
+        try:
+            user = User.objects.create_user(username=nombre, password=contraseña)
+            login(request,user)
+            #Redireccionar la página /index
+            return HttpResponseRedirect('/mainApp')
+        except IntegrityError: # Caso en que el usuario con tal nombre ya exista
+            return HttpResponseRedirect('.')
+
 
 
 def login_user(request):

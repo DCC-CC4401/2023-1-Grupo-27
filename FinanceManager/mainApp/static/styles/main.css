@@ -5,10 +5,10 @@
     font-size: 2rem;
 }
 
-.col {
-    border: 1px solid red;
-}
-
 #miniBox{
     border: 2px solid blue;
+}
+
+.customButtonWidth{
+    width: 100px !important;
 }

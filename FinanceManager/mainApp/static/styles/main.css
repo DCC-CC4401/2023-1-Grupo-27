@@ -1,6 +1,6 @@
 .box {
+    background-color: lightblue;
     min-height: 50px;
-    font-size: 2rem;
 }
 
 .customButtonWidth{

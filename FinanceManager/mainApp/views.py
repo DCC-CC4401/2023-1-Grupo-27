@@ -29,7 +29,7 @@ def register_user(request):
             user = User.objects.create_user(username=nombre, password=contraseña)
             login(request,user)
             #Redireccionar la página /index
-            return HttpResponseRedirect('/mainApp')
+            return render(request, 'index.html')
         except IntegrityError: # Caso en que el usuario con tal nombre ya exista
             return HttpResponseRedirect('.')
 
@@ -44,7 +44,7 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña) # Autenticamos el usuario
         if usuario is not None: # Si la respuesta de la autenticacion no fue None, el usuario existe y puede entrar
             login(request,usuario)
-            return HttpResponseRedirect('/mainApp')
+            return render(request, 'index.html')
         else: # Caso contrario debe registrarse
             return HttpResponseRedirect('/login')
         

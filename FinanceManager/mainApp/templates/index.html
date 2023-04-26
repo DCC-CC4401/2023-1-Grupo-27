@@ -65,52 +65,144 @@
 
         <!-- Start of BOX -->
 
+        {% if user.is_authenticated %}
+        <div class="container my-2" id="box">
+            <div class="box">
+                <div class="row pt-3 tex w-100" style="background-color:lightgray; margin: auto; font-size: xx-large;">
+                    <span id="nombreUsuario">Hola USUARIO, este es tu saldo:</span>
+                    <span id="saldoUsuario"></span>
+                </div>
+                <div class="row p-2 my-2">
+                    <div class="col">
+                        <button type="button" class="btn btn-success btn-block customButtonWidth" data-bs-toggle="modal" data-bs-target="#ingreso">
+                            Ingreso
+                        </button>
+                        <button type="button" class="btn btn-danger btn-block customButtonWidth" data-bs-toggle="modal" data-bs-target="#egreso">
+                            Egreso
+                        </button>
+                    </div>
+                </div>
+                <div class="row border border-dark border-2" style="background-color:lightgray; margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
+                    <div class="row py-2 border border-dark border-2" style="background-color: lightgray; margin: auto;">
+                        <div class="col">
+                            <label for="desde" class="form-label">Desde</label>
+                            <input type="date" class="form-control form-select-sm" id="desde">
+                        </div>
+                        <div class="col">
+                            <label for="hasta" class="form-label">Hasta</label>
+                            <input type="date" class="form-control form-select-sm" id="hasta">  
+                        </div>
+                        <div class="col text-end">
+                            <label for="categoriaEscoger" class="form-label">Categoría</label>
+                            <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger">
+                                <option value="none">Escoger</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row border border-dark border-2" style="background-color: lightgray; margin: auto;">
+                        <div class="col">No se xd</div>
+                    </div>
+                </div>
+                <div class="row"></div><!-- To add whitespace after last <div mb-3> -->
+            </div>
+        </div>
+
+        {% else %}
         <div class="container my-2 text-center" id="box">
-                <div class="box p-5 py-4">
-                    <div class="row pb-1 text-center">
-                        <h1><span lang="en">HOLA MUNDO</span></h1>
+            <div class="box p-5 py-4">
+                <div class="row pb-1 text-center">
+                    <h1><span lang="en">HOLA MUNDO</span></h1>
+                </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <span>Aqui van cosas</span>
                     </div>
-                    <div class="row p-2">
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
+                    <div class="col">
+                        <span>Aqui van cosas</span>
                     </div>
-                    <div class="row p-5">
-                        <div class="container" id="miniBox">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <span>Aqui van cosas minibox</span>
-                                </div>
+                    <div class="col">
+                        <span>Aqui van cosas</span>
+                    </div>
+                </div>
+                <div class="row p-5">
+                    <div class="container" id="miniBox">
+                        <div class="row">
+                            <div class="col text-center">
+                                <span>Aqui van cosas minibox</span>
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col text-center">
-                            <span>Aqui van cosas</span>
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
-                        <div class="col">
-                            <span>Aqui van cosas</span>
-                        </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col text-center">
+                        <span>Aqui van cosas</span>
                     </div>
                 </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <span>Aqui van cosas</span>
+                    </div>
+                    <div class="col">
+                        <span>Aqui van cosas</span>
+                    </div>
+                    <div class="col">
+                        <span>Aqui van cosas</span>
+                    </div>
+                    <div class="col">
+                        <span>Aqui van cosas</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        {% endif %}
+        <div></div>
+
+        <!-- Modal Ingreso -->
+
+        <div class="modal fade" id="ingreso" tabindex="-1" aria-labelledby="ingresoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ingresoLabel">Ingreso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="ingresoFecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="ingresoFecha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ingresoCategoria" class="form-label">Categoría</label>
+                                <select class="form-select" aria-label="categoria" id="ingresoCategoria" required>
+                                    <option value="">Elija categoría</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ingresoTitulo" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="ingresoTitulo" required>
+                            </div>
+                            <label for="ingresoMonto" class="form-label">Monto</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" aria-label="ingresoMonto" required>
+                              </div>
+                            <button type="submit" class="btn btn-primary">Añadir ingreso</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+
+        
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

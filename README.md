@@ -8,9 +8,7 @@
 
 *Usuario*(**ID**:int, nombreDeUsuario:string, contraseña:string, saldo:int)
 
-*RealizaTransaccion*(**ID_Usuario**:int, **ID_Transaccion**:int, fecha:string)
-
-*Transaccion*(**ID**:int, nombre:string, tipo:string, categoria:string, monto:int)
+*Transaccion*(**ID**:int, nombre:string, tipo:string, categoria:string, monto:int, fecha:string, ID_Usuario:int)
 
 ## Bocetos del Frontend de baja fidelidad
 

@@ -13,7 +13,19 @@ def index(request):
         user = request.user # Obtenemos el usuario
         transacciones = Transaccion.objects.filter(usuario=user.id) # Obtener transacciones del usuario
         return render(request, "index.html", {"transacciones": transacciones, "user": user})
-    
+    if request.method == "POST":
+        if "ingreso" in request.POST:
+            titulo = request.POST["titulo"]  # titulo de la transaccion
+            nombre_categoria = request.POST["categoria"]  # Nombre de la categoria, en caso de que no se especifique sera el string vacio por defecto
+            monto = request.POST["monto"]  # Monto del ingreso
+            fecha = request.POST["fecha"] # Fecha de la transaccion
+            if request.user.is_authenticated: # Creamos la transaccion con los datos obtenidos si el usuario esta autenticado
+                if fecha != "": # Caso de que no se ingrese una fecha
+                    nueva_transaccion = Transaccion(nombre=titulo, tipo='Ingreso', categoria=nombre_categoria, monto=monto, fecha=fecha, usuario=request.user) 
+                else:
+                    nueva_transaccion = Transaccion(nombre=titulo, tipo='Ingreso', categoria=nombre_categoria, monto=monto, usuario=request.user) 
+                nueva_transaccion.save()  # Se guarda la transaccion en base de datos
+
     return redirect("/mainApp")
 
 def register_user(request):

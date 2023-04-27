@@ -95,17 +95,22 @@
                         <div class="col text-end">
                             <label for="categoriaEscoger" class="form-label">Categoría</label>
                             <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger">
-                                <option value="none">Escoger</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="''">Escoger</option>
+                                <option value="CategoriaUno">One</option>
+                                <option value="CategoriaDos">Two</option>
+                                <option value="CategoriaTres">Three</option>
                             </select>
                         </div>
                     </div>
                     <div class="row border border-dark border-2" style="background-color: lightgray; margin: auto;">
                         {% for transaccion in transacciones %}
-                        <span class="transacciones_nombre"><b>Título: </b>{{ transaccion.nombre }}</span></label>
-                        <span class="transaccion_monto"><b>Monto: </b>{{ transaccion.monto }}</span>
+                            <span class="transaccion_tipo"><b>{{ transaccion.tipo}}</b></span>
+                            <span class="transacciones_nombre"><u>Título</u>: {{ transaccion.nombre }}</span></label>
+                            <span class="transaccion_monto"><u>Monto</u>: {{ transaccion.monto }}</span>
+                            <span class="transaccion_fecha"><u>Fecha</u>: {{ transaccion.fecha }}</span>
+                            {% if transaccion.categoria != '' %}
+                                <span class="transaccion_categoria"><u>Categoria</u>: {{ transaccion.categoria }}</span>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -174,30 +179,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="ingresoFecha" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="ingresoFecha" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="ingresoCategoria" class="form-label">Categoría</label>
-                                <select class="form-select" aria-label="categoria" id="ingresoCategoria" required>
-                                    <option value="">Elija categoría</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
+                        <form action="" method="post">
+                            {% csrf_token %}
                             <div class="mb-3">
                                 <label for="ingresoTitulo" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="ingresoTitulo" required>
+                                <input type="text" class="form-control" id="ingresoTitulo" placeholder="Asigne un titulo a su ingreso" name="titulo" required>
                             </div>
                             <label for="ingresoMonto" class="form-label">Monto</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="ingresoMonto" required>
-                              </div>
-                            <button type="submit" class="btn btn-primary">Añadir ingreso</button>
+                                <input type="text" class="form-control" aria-label="ingresoMonto" placeholder="Ingrese el monto de su ingreso" name="monto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ingresoCategoria" class="form-label">Categoría (Opcional)</label>
+                                <input type="text" class="form-control" id="ingresoCategoria" placeholder="Asigne una categoria a su ingreso" name="categoria">
+                            </div>
+                            <div class="mb-3">
+                                <label for="ingresoFecha" class="form-label">Fecha (Opcional)</label>
+                                <input type="date" class="form-control" id="ingresoFecha" name="fecha">
+                            </div>
+                            <button type="submit" name="ingreso" class="btn btn-primary">Añadir ingreso</button>
                         </form>
                     </div>
                 </div>

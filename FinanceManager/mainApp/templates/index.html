@@ -39,7 +39,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Usuario autenticado: {{user.is_authenticated}}</a>
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Debug</a>
                         </li>
                     </ul>
 
@@ -199,6 +199,40 @@
                                 <input type="date" class="form-control" id="ingresoFecha" name="fecha">
                             </div>
                             <button type="submit" name="ingreso" class="btn btn-primary">Añadir ingreso</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="egreso" tabindex="-1" aria-labelledby="egresoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="egresoLabel">Egreso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="egresoTitulo" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="egresoTitulo" placeholder="Asigne un titulo a su egreso" name="titulo" required>
+                            </div>
+                            <label for="egresoMonto" class="form-label">Monto</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" aria-label="egresoMonto" placeholder="Ingrese el monto de su egreso" name="monto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="egresoCategoria" class="form-label">Categoría (Opcional)</label>
+                                <input type="text" class="form-control" id="egresoCategoria" placeholder="Asigne una categoria a su egreso" name="categoria">
+                            </div>
+                            <div class="mb-3">
+                                <label for="egresoFecha" class="form-label">Fecha (Opcional)</label>
+                                <input type="date" class="form-control" id="egresoFecha" name="fecha">
+                            </div>
+                            <button type="submit" name="egreso" class="btn btn-primary">Añadir egreso</button>
                         </form>
                     </div>
                 </div>

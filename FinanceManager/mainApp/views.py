@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth import authenticate, login, logout
 from .models import Transaccion
+from django.urls import reverse
 
 def index(request):
     if request.method == "GET":
@@ -26,7 +27,24 @@ def index(request):
                 else:
                     nueva_transaccion = Transaccion(nombre=titulo, tipo=tipo, categoria=nombre_categoria, monto=monto, usuario=request.user) 
                 nueva_transaccion.save()  # Se guarda la transaccion en base de datos
-
+        if "modificar" in request.POST:
+            transaccion_id = request.POST.get('transaccion_id')
+            transaccion = Transaccion.objects.get(id = transaccion_id)
+            if request.user == transaccion.usuario:
+                if request.POST["titulo"] != "":
+                    transaccion.nombre = request.POST["titulo"]
+                if request.POST["categoria"] != "":
+                    transaccion.categoria = request.POST["categoria"]
+                if request.POST["monto"] != "":
+                    transaccion.monto = request.POST["monto"]
+                if request.POST["fecha"] != "":
+                    transaccion.fecha = request.POST["fecha"]
+                if request.POST["tipo"] != 'opcion1':
+                    if request.POST["tipo"] == 'opcion2':
+                        transaccion.tipo = 'Ingreso'
+                    if request.POST["tipo"] == 'opcion3':
+                        transaccion.tipo = 'Egreso'
+                transaccion.save()
     return redirect("/mainApp")
 
 def register_user(request):

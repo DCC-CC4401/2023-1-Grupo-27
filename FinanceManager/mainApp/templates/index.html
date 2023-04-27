@@ -13,7 +13,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Finance Manager</a>
+                <a class="navbar-brand" href="{% url 'index' %}">Finance Manager</a>
                     
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="%../mainApp">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -39,7 +39,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Usuario autenticado: {{user.is_authenticated}}</a>
                         </li>
                     </ul>
 
@@ -69,7 +69,7 @@
         <div class="container my-2" id="box">
             <div class="box">
                 <div class="row pt-3 tex w-100" style="background-color:lightgray; margin: auto; font-size: xx-large;">
-                    <span id="nombreUsuario">Hola USUARIO, este es tu saldo:</span>
+                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo:</span>
                     <span id="saldoUsuario"></span>
                 </div>
                 <div class="row p-2 my-2">
@@ -103,7 +103,10 @@
                         </div>
                     </div>
                     <div class="row border border-dark border-2" style="background-color: lightgray; margin: auto;">
-                        <div class="col">No se xd</div>
+                        {% for transaccion in transacciones %}
+                        <span class="transacciones_nombre"><b>Título: </b>{{ transaccion.nombre }}</span></label>
+                        <span class="transaccion_monto"><b>Monto: </b>{{ transaccion.monto }}</span>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="row"></div><!-- To add whitespace after last <div mb-3> -->

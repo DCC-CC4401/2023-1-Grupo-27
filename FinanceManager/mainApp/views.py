@@ -1,15 +1,20 @@
 from pyexpat.errors import messages
 from django.db import IntegrityError
 from mainApp.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth import authenticate, login, logout
+from .models import Transaccion
 
 def index(request):
-    template = loader.get_template('./index.html')
-    return HttpResponse(template.render())
+    if request.method == "GET":
+        user = request.user # Obtenemos el usuario
+        transacciones = Transaccion.objects.filter(usuario=user.id) # Obtener transacciones del usuario
+        return render(request, "index.html", {"transacciones": transacciones, "user": user})
+    
+    return redirect("/mainApp")
 
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
@@ -29,6 +34,7 @@ def register_user(request):
             user = User.objects.create_user(username=nombre, password=contraseña)
             login(request,user)
             #Redireccionar la página /index
+            return HttpResponseRedirect('/mainApp')
             return render(request, 'index.html')
         except IntegrityError: # Caso en que el usuario con tal nombre ya exista
             return HttpResponseRedirect('.')
@@ -44,10 +50,10 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña) # Autenticamos el usuario
         if usuario is not None: # Si la respuesta de la autenticacion no fue None, el usuario existe y puede entrar
             login(request,usuario)
-            return render(request, 'index.html')
+            return HttpResponseRedirect('../mainApp')
         else: # Caso contrario debe registrarse
             return HttpResponseRedirect('/login')
         
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('./mainApp')
+    return redirect("/mainApp")

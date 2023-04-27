@@ -35,7 +35,6 @@ def register_user(request):
             login(request,user)
             #Redireccionar la página /index
             return HttpResponseRedirect('/mainApp')
-            return render(request, 'index.html')
         except IntegrityError: # Caso en que el usuario con tal nombre ya exista
             return HttpResponseRedirect('.')
 

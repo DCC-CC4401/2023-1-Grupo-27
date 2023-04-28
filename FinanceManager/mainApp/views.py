@@ -15,7 +15,7 @@ def index(request):
     if request.method == "GET":
         user = request.user # Obtenemos el usuario
         transacciones = Transaccion.objects.filter(usuario=user.id) # Obtener transacciones del usuario
-        saldo = saldo_usuario(request, user.id) # Obtener saldo del usuario
+        saldo = saldo_usuario(user.id) # Obtener saldo del usuario
         return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo})
     if request.method == "POST":
         if "ingreso" in request.POST or "egreso" in request.POST:
@@ -91,9 +91,12 @@ def logout_user(request):
     logout(request)
     return redirect("/mainApp")
 
-def saldo_usuario(request, id_usuario):
-    usuario = get_object_or_404(User, id=id_usuario)
-    ingresos = Transaccion.objects.filter(usuario=usuario, tipo='Ingreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
-    egresos = Transaccion.objects.filter(usuario=usuario, tipo='Egreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
-    saldo = usuario.saldo + ingresos - egresos
+def saldo_usuario(id_usuario):
+    if id_usuario is not None:
+        usuario = get_object_or_404(User, id=id_usuario)
+        ingresos = Transaccion.objects.filter(usuario=usuario, tipo='Ingreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
+        egresos = Transaccion.objects.filter(usuario=usuario, tipo='Egreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
+        saldo = usuario.saldo + ingresos - egresos
+    else:
+        saldo = 0
     return str(saldo)

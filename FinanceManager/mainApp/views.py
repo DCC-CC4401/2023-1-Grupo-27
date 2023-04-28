@@ -1,5 +1,6 @@
 from pyexpat.errors import messages
 from django.db import IntegrityError
+from django.db import models
 from mainApp.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -8,12 +9,14 @@ from django.template import loader
 from django.contrib.auth import authenticate, login, logout
 from .models import Transaccion
 from django.urls import reverse
+from django.shortcuts import render, get_object_or_404
 
 def index(request):
     if request.method == "GET":
         user = request.user # Obtenemos el usuario
         transacciones = Transaccion.objects.filter(usuario=user.id) # Obtener transacciones del usuario
-        return render(request, "index.html", {"transacciones": transacciones, "user": user})
+        saldo = saldo_usuario(request, user.id) # Obtener saldo del usuario
+        return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo})
     if request.method == "POST":
         if "ingreso" in request.POST or "egreso" in request.POST:
             tipo = "Ingreso" if "ingreso" in request.POST else "Egreso"
@@ -87,3 +90,10 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("/mainApp")
+
+def saldo_usuario(request, id_usuario):
+    usuario = get_object_or_404(User, id=id_usuario)
+    ingresos = Transaccion.objects.filter(usuario=usuario, tipo='Ingreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
+    egresos = Transaccion.objects.filter(usuario=usuario, tipo='Egreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
+    saldo = usuario.saldo + ingresos - egresos
+    return str(saldo)

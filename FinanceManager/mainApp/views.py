@@ -48,6 +48,11 @@ def index(request):
                     if request.POST["tipo"] == 'opcion3':
                         transaccion.tipo = 'Egreso'
                 transaccion.save()
+        #if "eliminar" in request.POST:
+            #transaccion_id = request.POST.get('transaccion_id')
+            #transaccion = Transaccion.objects.get(id = transaccion_id)
+            #if request.user == transaccion.usuario:
+                #transaccion.delete()
     return redirect("/mainApp")
 
 def register_user(request):

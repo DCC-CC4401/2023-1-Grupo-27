@@ -112,10 +112,10 @@
                                 <span class="transaccion_categoria"><u>Categoria</u>: {{ transaccion.categoria }}</span>
                             {% endif %}
                             <div>
-                                <button type="button" class="btn btn-danger btn-block customButtonWidth modificar-btn" 
+                                <button type="button" class="btn btn-warning btn-block customButtonWidth modificar-btn" 
                                     data-bs-toggle="modal" data-bs-target="#modificar" id="modificar-btn-{{ transaccion.id }}" 
                                     data-transaccion-id="{{ transaccion.id }}">
-                                    Modificar
+                                    <span style="color: rgb(255, 255, 255);">Modificar</span>
                                 </button>
                                 <button type="button" class="btn btn-danger eliminar-btn" 
                                     data-bs-toggle="modal" data-bs-target="#eliminar" id="eliminar-btn-{{ transaccion.id }}" 

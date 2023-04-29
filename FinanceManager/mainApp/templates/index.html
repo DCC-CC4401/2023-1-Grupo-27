@@ -117,7 +117,7 @@
                                     data-transaccion-id="{{ transaccion.id }}">
                                     Modificar
                                 </button>
-                                <button class="btn btn-danger eliminar-btn" 
+                                <button type="button" class="btn btn-danger eliminar-btn" 
                                     data-bs-toggle="modal" data-bs-target="#eliminar" id="eliminar-btn-{{ transaccion.id }}" 
                                     data-transaccion-id="{{ transaccion.id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -137,6 +137,19 @@
                                 const transaccionId = btn.getAttribute('data-transaccion-id');
                                 // Mostrar el valor en el modal
                                 document.getElementById('transaccion-id-modal').value = transaccionId;
+                                });
+                            });
+                        </script>
+                        <script>
+                            // Seleccionar todos los botones con clase "eliminar-btn"
+                            const eliminarBtns = document.querySelectorAll('.eliminar-btn');
+                            // Agregar evento click a cada botón
+                            eliminarBtns.forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                // Obtener el valor del atributo "data-transaccion-id"
+                                const transaccionId = btn.getAttribute('data-transaccion-id');
+                                // Mostrar el valor en el modal
+                                document.getElementById('eliminar-id-modal').value = transaccionId;
                                 });
                             });
                         </script>
@@ -332,7 +345,7 @@
                         <form action="" method="post">
                             {% csrf_token %}
                             <div>
-                                <input type="hidden" id="transaccion-id-modal" name="transaccion_id">
+                                <input type="hidden" id="eliminar-id-modal" name="transaccion_id">
                             </div>
                             <p style="color:red"><b>Advertencia, esta acción no es reversible</b></p>
                             <button type="submit" name="eliminar" class="btn btn-danger btn-block customButtonWidth eliminar-btn">Eliminar</button>

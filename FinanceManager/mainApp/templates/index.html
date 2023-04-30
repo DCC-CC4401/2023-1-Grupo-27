@@ -69,7 +69,7 @@
         <div class="container my-2" id="box">
             <div class="box">
                 <div class="row pt-3 tex w-100" style="background-color:lightgray; margin: auto; font-size: xx-large;">
-                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo: {{ saldo }}</span>
+                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo: ${{ saldo }}</span>
                     <span id="saldoUsuario"></span>
                 </div>
                 <div class="row p-2 my-2">
@@ -119,16 +119,16 @@
                                   <td>{{ transaccion.fecha }}</td>
                                   <td>{% if transaccion.categoria != '' %}{{ transaccion.categoria }}{% endif %}</td>
                                   {% if transaccion.tipo == 'Ingreso' %}
-                                  <td class="text-end" style="color:green">+{{ transaccion.monto }}</td>
+                                    <td class="text-end" style="color:green">+${{ transaccion.monto }}</td>
                                   {% endif %}
                                   {% if transaccion.tipo == 'Egreso' %}
-                                  <td class="text-end" style="color:red">-{{ transaccion.monto }}</td>
+                                    <td class="text-end" style="color:red">-${{ transaccion.monto }}</td>
                                   {% endif %}
                                   <td class = "text-end">
                                     <button type="button" class="btn btn-warning btn-block customButtonWidth modificar-btn" 
                                       data-bs-toggle="modal" data-bs-target="#modificar" id="modificar-btn-{{ transaccion.id }}" 
                                       data-transaccion-id="{{ transaccion.id }}">
-                                      Modificar
+                                      <span style="color:white">Modificar</span>
                                     </button>
                                     <button type="button" class="btn btn-danger eliminar-btn" 
                                       data-bs-toggle="modal" data-bs-target="#eliminar" id="eliminar-btn-{{ transaccion.id }}" 

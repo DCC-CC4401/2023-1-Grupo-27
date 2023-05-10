@@ -6,3 +6,62 @@
 .customButtonWidth{
     width: 100px !important;
 }
+
+.modificar-btn{
+    background-color: #F7B538 !important;
+    border-color: #F7B538 !important;
+}
+
+.modificar-btn:hover{
+    background-color: #f9c86a !important;
+    border-color: #f9c86a !important;
+}
+
+.btn-primary{
+    background-color: #258EA6 !important;
+    border-color: #258EA6 !important;
+}
+
+.btn-primary:hover{
+    background-color: #4abcd7 !important;
+    border-color: #4abcd7 !important;
+}
+
+.border-dark{
+    margin: auto;
+    border-color: #7c7c7c !important;
+}
+
+.main_background{
+    background-color: #d1d1d1 !important;
+}
+
+.user_saldo{
+    margin: auto; font-size: xx-large;
+}
+
+.main_container2{
+    margin-left: 20px; margin-right: 20px; margin-bottom: 20px;
+}
+
+.red_text{
+    color:red !important;
+}
+
+.green_text{
+    color: green !important;
+}
+
+.white_text{
+    color: white !important;
+}
+
+#desde{
+    width:150px;
+    height: 30px;
+}
+
+#hasta{
+    width:150px;
+    height: 30px;
+}

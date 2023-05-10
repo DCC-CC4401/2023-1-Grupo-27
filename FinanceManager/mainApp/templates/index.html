@@ -13,35 +13,13 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}">Finance Manager</a>
-                    
+                <a class="navbar-brand" href="{% url 'index' %}">Finance Manager
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
               
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Debug</a>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
                     <!-- Login buttons -->
                     
@@ -68,8 +46,8 @@
         {% if user.is_authenticated %}
         <div class="container my-2" id="box">
             <div class="box">
-                <div class="row pt-3 tex w-100" style="background-color:lightgray; margin: auto; font-size: xx-large;">
-                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo: ${{ saldo }}</span>
+                <div class="row pt-3 tex w-100 main_background user_saldo">
+                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo: <b>${{ saldo }}</b></span>
                     <span id="saldoUsuario"></span>
                 </div>
                 <div class="row p-2 my-2">
@@ -82,18 +60,18 @@
                         </button>
                     </div>
                 </div>
-                <div class="row border border-dark border-2" style="background-color:lightgray; margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
-                    <div class="row py-2 border border-dark border-2" style="background-color: lightgray; margin: auto;">
-                        <div class="col">
-                            <label for="desde" class="form-label">Desde</label>
+                <div class="row border border-dark border-1 main_background main_container2">
+                    <div class="row py-2 border border-dark border-1 py-3 main_background">
+                        <div class="col d-inline-flex">
+                            <label for="desde" class="form-label pe-2">Desde</label>
                             <input type="date" class="form-control form-select-sm" id="desde">
                         </div>
-                        <div class="col">
-                            <label for="hasta" class="form-label">Hasta</label>
+                        <div class="col d-inline-flex">
+                            <label for="hasta" class="form-label pe-2">Hasta</label>
                             <input type="date" class="form-control form-select-sm" id="hasta">  
                         </div>
-                        <div class="col text-end">
-                            <label for="categoriaEscoger" class="form-label">Categoría</label>
+                        <div class="col d-inline-flex justify-content-lg-end">
+                            <label for="categoriaEscoger" class="form-label pe-2">Categoría</label>
                             <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger">
                                 <option value="''">Escoger</option>
                                 <option value="CategoriaUno">One</option>
@@ -102,47 +80,49 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row border border-dark border-2" style="background-color: lightgray; margin: auto;">
-                        <table>
-                            <thead>
-                              <tr>
-                                <th>Título</th>
-                                <th>Fecha</th>
-                                <th>Categoría</th>
-                                <th>Monto</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {% for transaccion in transacciones %}
-                                <tr>
-                                  <td>{{ transaccion.nombre }}</td>
-                                  <td>{{ transaccion.fecha }}</td>
-                                  <td>{% if transaccion.categoria != '' %}{{ transaccion.categoria }}{% endif %}</td>
-                                  {% if transaccion.tipo == 'Ingreso' %}
-                                    <td class="text-end" style="color:green">+${{ transaccion.monto }}</td>
-                                  {% endif %}
-                                  {% if transaccion.tipo == 'Egreso' %}
-                                    <td class="text-end" style="color:red">-${{ transaccion.monto }}</td>
-                                  {% endif %}
-                                  <td class = "text-end">
-                                    <button type="button" class="btn btn-warning btn-block customButtonWidth modificar-btn" 
-                                      data-bs-toggle="modal" data-bs-target="#modificar" id="modificar-btn-{{ transaccion.id }}" 
-                                      data-transaccion-id="{{ transaccion.id }}">
-                                      <span style="color:white">Modificar</span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger eliminar-btn" 
-                                      data-bs-toggle="modal" data-bs-target="#eliminar" id="eliminar-btn-{{ transaccion.id }}" 
-                                      data-transaccion-id="{{ transaccion.id }}">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                                      </svg>
-                                    </button>
-                                  </td>
-                                </tr>
-                              {% endfor %}
-                            </tbody>
-                          </table>
+                    <div class="row border border-dark border-1 py-2 main_background">
+                        <div class="table-responsive-md">
+                            <table class="table table-hover align-text-top">
+                                <thead>
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Fecha</th>
+                                        <th>Categoría</th>
+                                        <th>Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    {% for transaccion in transacciones %}
+                                    <tr>
+                                        <td>{{ transaccion.nombre }}</td>
+                                        <td>{{ transaccion.fecha }}</td>
+                                        <td>{% if transaccion.categoria != '' %}{{ transaccion.categoria }}{% endif %}</td>
+                                        {% if transaccion.tipo == 'Ingreso' %}
+                                        <td class="text-end green_text"><b>+${{ transaccion.monto }}</b></td>
+                                        {% endif %}
+                                        {% if transaccion.tipo == 'Egreso' %}
+                                        <td class="text-end red_text"><b>-${{ transaccion.monto }}</b></td>
+                                        {% endif %}
+                                        <td class = "text-end">
+                                        <button type="button" class="btn btn-warning btn-block customButtonWidth modificar-btn" 
+                                            data-bs-toggle="modal" data-bs-target="#modificar" id="modificar-btn-{{ transaccion.id }}" 
+                                            data-transaccion-id="{{ transaccion.id }}">
+                                            <span class="white_text">Modificar</span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger eliminar-btn" 
+                                            data-bs-toggle="modal" data-bs-target="#eliminar" id="eliminar-btn-{{ transaccion.id }}" 
+                                            data-transaccion-id="{{ transaccion.id }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                            </svg>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                           
                         <script>
                             // Seleccionar todos los botones con clase "modificar-btn"
@@ -364,7 +344,7 @@
                             <div>
                                 <input type="hidden" id="eliminar-id-modal" name="transaccion_id">
                             </div>
-                            <p style="color:red"><b>Advertencia, esta acción no es reversible</b></p>
+                            <p class="red_text"><b>Advertencia, esta acción no es reversible</b></p>
                             <button type="submit" name="eliminar" class="btn btn-danger btn-block customButtonWidth eliminar-btn">Eliminar</button>
                         </form>
                     </div>

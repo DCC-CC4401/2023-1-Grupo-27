@@ -27,24 +27,24 @@ def index(request):  # Metodo para la pagina principal
                 else: # Caso en que no se haya ingresado una fecha
                     nueva_transaccion = Transaccion(nombre=titulo, tipo=tipo, categoria=nombre_categoria, monto=monto, usuario=request.user) 
                 nueva_transaccion.save()  # Se guarda la transaccion en base de datos
-        if "modificar" in request.POST:
-            transaccion_id = request.POST.get('transaccion_id')
-            transaccion = Transaccion.objects.get(id = transaccion_id)
-            if request.user == transaccion.usuario:
-                if request.POST["titulo"] != "":
-                    transaccion.nombre = request.POST["titulo"]
-                if request.POST["categoria"] != "":
-                    transaccion.categoria = request.POST["categoria"]
-                if request.POST["monto"] != "":
-                    transaccion.monto = request.POST["monto"]
-                if request.POST["fecha"] != "":
-                    transaccion.fecha = request.POST["fecha"]
-                if request.POST["tipo"] != 'opcion1':
-                    if request.POST["tipo"] == 'opcion2':
+        if "modificar" in request.POST:#Recibimos un post del modal de modificacion de transaccion
+            transaccion_id = request.POST.get('transaccion_id')# obtenemos el id de la transaccion
+            transaccion = Transaccion.objects.get(id = transaccion_id) #obtenemos la transaccion a partir de el id encontrado
+            if request.user == transaccion.usuario: #Se confirma que el usuario actual sea el dueño de la transaccion que se quiere modificar
+                if request.POST["titulo"] != "": #Confirmamos que se haya escrito algo en la casilla de nuevo titulo
+                    transaccion.nombre = request.POST["titulo"] #Reemplazamos el titulo actual por el nuevo titulo ingresado
+                if request.POST["categoria"] != "": #Confirmamos que se haya escrito algo en la casilla de nueva categoria
+                    transaccion.categoria = request.POST["categoria"] #Reemplazamos la categoria actual por la nueva categoria ingresada
+                if request.POST["monto"] != "": #Confirmamos que se haya escrito algo en la casilla de nuevo monto
+                    transaccion.monto = request.POST["monto"] #Reemplazamos el monto actual por el nuevo monto ingresado
+                if request.POST["fecha"] != "": #Confirmamos que se haya escrito algo en la casilla de nueva fecha
+                    transaccion.fecha = request.POST["fecha"] #Reemplazamos la fecha actual por la nueva fecha ingresada
+                if request.POST["tipo"] != 'opcion1': #verificamos el nuevo tipo de transaccion que quiere asignar
+                    if request.POST["tipo"] == 'opcion2': #Se cambia el tipo de la transaccion actual a Ingreso
                         transaccion.tipo = 'Ingreso'
-                    if request.POST["tipo"] == 'opcion3':
+                    if request.POST["tipo"] == 'opcion3': #Se cambia el tipo de la transaccion actual a Egreso
                         transaccion.tipo = 'Egreso'
-                transaccion.save()
+                transaccion.save() #Se guarda la transaccion con los nuevos datos
         if "eliminar" in request.POST:
             transaccion_id = request.POST.get('transaccion_id')
             transaccion = Transaccion.objects.get(id = transaccion_id)

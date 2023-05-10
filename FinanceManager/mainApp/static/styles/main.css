@@ -1,7 +1,40 @@
+/* Main */
+
 .box {
     background-color: lightblue;
     min-height: 50px;
 }
+
+.border-dark{
+    margin: auto;
+    border-color: #7c7c7c !important;
+}
+
+.main_background{
+    background-color: #d1d1d1 !important;
+}
+
+.user_saldo{
+    margin: auto; font-size: xx-large;
+}
+
+.main_container2{
+    margin-left: 20px; margin-right: 20px; margin-bottom: 20px;
+}
+
+/* Date inputs */
+
+#desde{
+    width:150px;
+    height: 30px;
+}
+
+#hasta{
+    width:150px;
+    height: 30px;
+}
+
+/* Buttons */
 
 .customButtonWidth{
     width: 100px !important;
@@ -27,22 +60,27 @@
     border-color: #4abcd7 !important;
 }
 
-.border-dark{
-    margin: auto;
-    border-color: #7c7c7c !important;
+.btn-success{
+    background-color: #47b92e !important;
+    border-color: #47b92e !important;
 }
 
-.main_background{
-    background-color: #d1d1d1 !important;
+.btn-success:hover{
+    background-color: #29dd00 !important;
+    border-color: #29dd00 !important;
 }
 
-.user_saldo{
-    margin: auto; font-size: xx-large;
+.btn-danger{
+    background-color: #e11933 !important;
+    border-color: #e11933 !important;
 }
 
-.main_container2{
-    margin-left: 20px; margin-right: 20px; margin-bottom: 20px;
+.btn-danger:hover{
+    background-color: #ff1313 !important;
+    border-color: #ff1313 !important;
 }
+
+/* Text colors */
 
 .red_text{
     color:red !important;
@@ -54,14 +92,4 @@
 
 .white_text{
     color: white !important;
-}
-
-#desde{
-    width:150px;
-    height: 30px;
-}
-
-#hasta{
-    width:150px;
-    height: 30px;
 }

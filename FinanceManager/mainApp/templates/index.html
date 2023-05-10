@@ -9,11 +9,14 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         
         <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+        <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}">Finance Manager
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'images/60x60.png' %}" alt="Finance Manager icon" class="d-inline-block">
+                    Finance Manager
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,14 +29,14 @@
                     <ul class="navbar-nav">
                         {% if user.is_authenticated %}
                         <li class="nav-item p-1">
-                            <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Logout</a>
+                            <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Cerrar sesión</a>
                         </li>
                         {% else %}
                         <li class="nav-item p-1">
-                            <a class="btn btn-primary" href="{% url 'register_user' %}" role="button">Register</a>
+                            <a class="btn btn-primary" href="{% url 'register_user' %}" role="button">Registrarse</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+                            <a class="btn btn-primary" href="{% url 'login' %}" role="button">Iniciar sesión</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -65,9 +68,7 @@
                         <div class="col d-inline-flex">
                             <label for="desde" class="form-label pe-2">Desde</label>
                             <input type="date" class="form-control form-select-sm" id="desde">
-                        </div>
-                        <div class="col d-inline-flex">
-                            <label for="hasta" class="form-label pe-2">Hasta</label>
+                            <label for="hasta" class="form-label ps-2 pe-2">Hasta</label>
                             <input type="date" class="form-control form-select-sm" id="hasta">  
                         </div>
                         <div class="col d-inline-flex justify-content-lg-end">
@@ -208,7 +209,6 @@
         <div></div>
 
         <!-- Modal Ingreso -->
-
         <div class="modal fade" id="ingreso" tabindex="-1" aria-labelledby="ingresoLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

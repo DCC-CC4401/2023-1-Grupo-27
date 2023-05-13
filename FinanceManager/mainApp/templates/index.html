@@ -89,7 +89,7 @@
                                         <th>Título</th>
                                         <th>Fecha</th>
                                         <th>Categoría</th>
-                                        <th>Monto</th>
+                                        <th class="text-center">Monto</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
@@ -99,10 +99,10 @@
                                         <td>{{ transaccion.fecha }}</td>
                                         <td>{% if transaccion.categoria != '' %}{{ transaccion.categoria }}{% endif %}</td>
                                         {% if transaccion.tipo == 'Ingreso' %}
-                                        <td class="text-end green_text"><b>+${{ transaccion.monto }}</b></td>
+                                        <td class="text-center green_text"><b>+${{ transaccion.monto }}</b></td>
                                         {% endif %}
                                         {% if transaccion.tipo == 'Egreso' %}
-                                        <td class="text-end red_text"><b>-${{ transaccion.monto }}</b></td>
+                                        <td class="text-center red_text"><b>-${{ transaccion.monto }}</b></td>
                                         {% endif %}
                                         <td class = "text-end">
                                         <button type="button" class="btn btn-warning btn-block customButtonWidth modificar-btn" 

@@ -93,3 +93,133 @@
 .white_text{
     color: white !important;
 }
+
+/* Pagina Inicio */
+
+.cuerpo-inicio{
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    color: white;
+    background-color: #F18E3D;
+}
+
+section{
+    padding: 0 10%;
+}
+
+.container-text {
+    background-clip: border-box;
+    border-bottom: 1px solid white;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: block;
+    justify-content: space-around;
+    display: flex;
+  }
+  
+.titulo-principal {
+    font-size: 50px;
+    line-height: 1;
+    margin: 0 0 45px;
+    text-align: center;
+    place-items: center;
+    margin-top: 45px;
+    color: white;
+}
+
+.cuerpo-inicio p {
+    font-size: 18px;
+    line-height: 1.9;
+    margin: 0 0 40px;
+    text-align: center;
+}
+
+.information {
+    flex-flow: column wrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: flex-start;
+    display: flex;
+}
+
+.information h2 {
+    float: left;
+}
+
+.information img {
+    float: left;
+    flex: none;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.w-col-2 {
+    width: 50%;
+}
+
+.w-col {
+    float: left;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.Titulo-Ejemplo {
+    max-width: 400px;
+    padding-left: 0;
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.inf-ejemplo {
+    width: auto;
+    max-width: 550px;
+    direction: ltr;
+    font-family: Nunito, sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+    text-align: left;
+    justify-content: flex-end;
+    align-self: flex-start;
+    padding-left: 0;
+    line-height: 35px;
+    display: block;
+}
+
+.app-img {
+    align-items: center;
+    flex: none;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+}
+
+.imagenApp {
+    width: 512px;
+    clear: none;
+    text-align: left;
+    object-fit: fill;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+    background-clip: padding-box;
+}
+
+@media (max-width: 1280px) {
+.container-text {
+    flex-direction: column;
+}
+.information,
+.app-img {
+    width: 100%;
+}
+}

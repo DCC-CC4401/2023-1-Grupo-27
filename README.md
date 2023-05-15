@@ -1,4 +1,14 @@
-# 2023-1-Grupo-27
+# Finance Manager
+
+## Descripción
+Finance Manager es una página web que ayuda a ordenar las finanzas de un usuario, guardando todas las transacciones financieras realizadas por un usuario.
+
+## Features
++ Crear, modificar y borrar ingresos/egresos.
++ Ver tu saldo disponible.
++ Asignar categorias a tus ingresos/egresos.
++ (To Be Implemented) Listar tus ingresos/egresos por categoria.
++ (To Be Implemented) Listar tus ingresos/egresos en un rango de fechas.
 
 ## Modelo ER
 
@@ -17,3 +27,11 @@
 
 ### Formulario de Ingreso
 ![Modelo ER](https://i.imgur.com/CpJ9kRX.jpg)
+
+## Vista Actual
+
+### Pagina Principal (Logged Out)
+
+### Pagina Principal (Logged In)
+
+### Formulario de Ingreso

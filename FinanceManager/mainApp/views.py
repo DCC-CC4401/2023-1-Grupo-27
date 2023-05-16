@@ -70,7 +70,6 @@ def register_user(request): # Metodo para registrar al usuario
             return HttpResponseRedirect('.')
 
 
-
 def login_user(request): # Metodo para hacer login a un usuario
     if request.method == 'GET': # Si estamos cargando la pagina
         return render(request,"./login.html") # Cargamos el html
@@ -88,12 +87,12 @@ def logout_user(request): # Metodo para hacer logout de un user
     logout(request) # Hacemos logout del usuario
     return redirect("/mainApp") # Redireccionamos a la pagina de inicio
 
-def saldo_usuario(id_usuario):
-    if id_usuario is not None:
-        usuario = get_object_or_404(User, id=id_usuario)
-        ingresos = Transaccion.objects.filter(usuario=usuario, tipo='Ingreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
-        egresos = Transaccion.objects.filter(usuario=usuario, tipo='Egreso').aggregate(models.Sum('monto'))['monto__sum'] or 0
-        saldo = usuario.saldo + ingresos - egresos
-    else:
+def saldo_usuario(id_usuario): # Metodo para conseguir el saldo de un usuario
+    if id_usuario is not None: # Si el usuario no es nulo
+        usuario = get_object_or_404(User, id=id_usuario) # Obtenemos el usuario
+        ingresos = Transaccion.objects.filter(usuario=usuario, tipo='Ingreso').aggregate(models.Sum('monto'))['monto__sum'] or 0 # Obtenemos la suma de todos sus ingresos
+        egresos = Transaccion.objects.filter(usuario=usuario, tipo='Egreso').aggregate(models.Sum('monto'))['monto__sum'] or 0 # Obtenemos la suma de todos sus egresos
+        saldo = usuario.saldo + ingresos - egresos # Calculamos el saldo del usuario
+    else: # Caso usuario nulo, saldo es por defecto 0
         saldo = 0
-    return str(saldo)
+    return str(saldo) # Devolvemos el saldo del usuario

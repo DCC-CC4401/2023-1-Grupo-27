@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 def index(request):  # Metodo para la pagina principal
     if request.method == "GET": # Se esta cargando la pagina
         user = request.user # Obtenemos el usuario
-        transacciones = Transaccion.objects.filter(usuario=user.id).order_by('-fecha') # Obtener transacciones del usuario
+        transacciones = Transaccion.objects.filter(usuario=user.id).order_by('-fecha') # Obtener transacciones del usuario ordenadas por fecha descendiente
         saldo = saldo_usuario(user.id) # Obtener saldo del usuario
         return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo}) # Cargamos la pagina con lo correspondiente
     if request.method == "POST": # Se envía un formulario desde la pagina
@@ -45,11 +45,11 @@ def index(request):  # Metodo para la pagina principal
                     if request.POST["tipo"] == 'opcion3': #Se cambia el tipo de la transaccion actual a Egreso
                         transaccion.tipo = 'Egreso'
                 transaccion.save() #Se guarda la transaccion con los nuevos datos
-        if "eliminar" in request.POST:
-            transaccion_id = request.POST.get('transaccion_id')
-            transaccion = Transaccion.objects.get(id = transaccion_id)
-            if request.user == transaccion.usuario:
-                transaccion.delete()
+        if "eliminar" in request.POST: #Recibimos un post del modal de modificacion de transaccion
+            transaccion_id = request.POST.get('transaccion_id') #obtenemos el id de la transaccion
+            transaccion = Transaccion.objects.get(id = transaccion_id) #obtenemos la transaccion a partir de el id encontrado
+            if request.user == transaccion.usuario: #Se confirma que el usuario actual sea el dueño de la transaccion que se quiere modificar
+                transaccion.delete() #Se elimina la transaccion actual
     return redirect("/mainApp")
 
 def register_user(request): # Metodo para registrar al usuario

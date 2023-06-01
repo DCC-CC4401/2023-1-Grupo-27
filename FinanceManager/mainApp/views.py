@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 def index(request):  # Metodo para la pagina principal
     if request.method == "GET": # Se esta cargando la pagina
         user = request.user # Obtenemos el usuario
-        transacciones = Transaccion.objects.filter(usuario=user.id) # Obtener transacciones del usuario
+        transacciones = Transaccion.objects.filter(usuario=user.id).order_by('-fecha') # Obtener transacciones del usuario
         saldo = saldo_usuario(user.id) # Obtener saldo del usuario
         return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo}) # Cargamos la pagina con lo correspondiente
     if request.method == "POST": # Se envía un formulario desde la pagina

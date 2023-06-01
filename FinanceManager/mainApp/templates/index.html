@@ -98,7 +98,7 @@
                                     {% for transaccion in transacciones %}
                                     <tr>
                                         <td>{{ transaccion.nombre }}</td>
-                                        <td>{{ transaccion.fecha }}</td>
+                                        <td>{{ transaccion.fecha | date:"d-m-Y" }}</td>
                                         <td>{% if transaccion.categoria != '' %}{{ transaccion.categoria }}{% endif %}</td>
                                         {% if transaccion.tipo == 'Ingreso' %}
                                         <td class="text-center green_text"><b>+${{ transaccion.monto }}</b></td>

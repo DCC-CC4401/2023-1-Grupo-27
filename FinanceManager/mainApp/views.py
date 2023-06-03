@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from .models import Transaccion
 from django.shortcuts import render, get_object_or_404
+from django.template.defaulttags import register
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 def index(request):  # Metodo para la pagina principal
     if request.method == "GET": # Se esta cargando la pagina
@@ -95,4 +97,8 @@ def saldo_usuario(id_usuario): # Metodo para conseguir el saldo de un usuario
         saldo = usuario.saldo + ingresos - egresos # Calculamos el saldo del usuario
     else: # Caso usuario nulo, saldo es por defecto 0
         saldo = 0
-    return str(saldo) # Devolvemos el saldo del usuario
+    return saldo # Devolvemos el saldo del usuario
+
+@register.filter
+def intdot(value):
+    return intcomma(value).replace(",", ".")

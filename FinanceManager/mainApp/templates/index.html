@@ -52,7 +52,7 @@
         <div class="container my-2" id="box">
             <div class="box">
                 <div class="row pt-3 tex w-100 main_background user_saldo">
-                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo: <b>${{ saldo }}</b></span>
+                    <span id="nombreUsuario">Hola {{user}}, este es tu saldo: <b>${{ saldo|intdot }}</b></span>
                     <span id="saldoUsuario"></span>
                 </div>
                 <div class="row p-2 my-2">
@@ -101,10 +101,10 @@
                                         <td>{{ transaccion.fecha | date:"d-m-Y" }}</td>
                                         <td>{% if transaccion.categoria != '' %}{{ transaccion.categoria }}{% endif %}</td>
                                         {% if transaccion.tipo == 'Ingreso' %}
-                                        <td class="text-center green_text"><b>+${{ transaccion.monto }}</b></td>
+                                        <td class="text-center green_text"><b>+${{ transaccion.monto|intdot }}</b></td>
                                         {% endif %}
                                         {% if transaccion.tipo == 'Egreso' %}
-                                        <td class="text-center red_text"><b>-${{ transaccion.monto }}</b></td>
+                                        <td class="text-center red_text"><b>-${{ transaccion.monto|intdot }}</b></td>
                                         {% endif %}
                                         <td class = "text-end">
                                         <button type="button" class="btn btn-warning btn-block customButtonWidth modificar-btn" 

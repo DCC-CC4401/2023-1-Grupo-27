@@ -228,11 +228,16 @@
                             <label for="ingresoMonto" class="form-label">Monto</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="ingresoMonto" placeholder="Ingrese el monto de su ingreso" name="monto" required>
+                                <input type="number" class="form-control" aria-label="ingresoMonto" placeholder="Ingrese el monto de su ingreso" name="monto" required>
                             </div>
                             <div class="mb-3">
                                 <label for="ingresoCategoria" class="form-label">Categoría (Opcional)</label>
-                                <input type="text" class="form-control" id="ingresoCategoria" placeholder="Asigne una categoria a su ingreso" name="categoria">
+                                <select type="text" class="form-control" id="ingresoCategoria" placeholder="Asigne una categoria a su ingreso" name="categoria">
+                                    <option value="" selected>Sin categoría</option>
+                                {% for categoria in categorias_form %}
+                                    <option>{{ categoria }}</option>
+                                {% endfor %}
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="ingresoFecha" class="form-label">Fecha (Opcional)</label>
@@ -264,11 +269,16 @@
                             <label for="egresoMonto" class="form-label">Monto</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="egresoMonto" placeholder="Ingrese el monto de su egreso" name="monto" required>
+                                <input type="number" class="form-control" aria-label="egresoMonto" placeholder="Ingrese el monto de su egreso" name="monto" required>
                             </div>
                             <div class="mb-3">
                                 <label for="egresoCategoria" class="form-label">Categoría (Opcional)</label>
-                                <input type="text" class="form-control" id="egresoCategoria" placeholder="Asigne una categoria a su egreso" name="categoria">
+                                <select type="text" class="form-control" id="egresoCategoria" placeholder="Asigne una categoria a su egreso" name="categoria">
+                                    <option value="" selected>Sin categoría</option>
+                                    {% for categoria in categorias_form %}
+                                        <option>{{ categoria }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="egresoFecha" class="form-label">Fecha (Opcional)</label>
@@ -308,11 +318,17 @@
                             <label for="modMonto" class="form-label"> Nuevo monto</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="modMonto" placeholder="Ingrese el monto de su ingreso" name="monto">
+                                <input type="number" class="form-control" aria-label="modMonto" placeholder="Ingrese el monto de su ingreso" name="monto">
                             </div>
                             <div class="mb-3">
                                 <label for="modCategoria" class="form-label">Nueva categoría</label>
-                                <input type="text" class="form-control" id="modCategoria" placeholder="Asigne una categoria a su ingreso" name="categoria">
+                                <select type="text" class="form-control" id="modCategoria" placeholder="Asigne una categoria a su ingreso" name="categoria">
+                                <option value="sinCambios" selected>No cambiar categoría</option>
+                                <option value="">Sin categoría</option>
+                                    {% for categoria in categorias_form %}
+                                        <option>{{ categoria }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="modFecha" class="form-label">Nueva fecha</label>

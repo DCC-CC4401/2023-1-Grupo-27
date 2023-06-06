@@ -67,12 +67,23 @@
                 </div>
                 <div class="row border border-dark border-1 main_background main_container2">
                     <div class="row py-2 border border-dark border-1 py-3 main_background">
-                        <div class="col d-inline-flex">
-                            <label for="desde" class="form-label pe-2">Desde</label>
-                            <input type="date" class="form-control form-select-sm" id="desde">
-                            <label for="hasta" class="form-label ps-2 pe-2">Hasta</label>
-                            <input type="date" class="form-control form-select-sm" id="hasta">  
-                        </div>
+                        <form method="get" action="">
+                            <label for="fecha_inicio">Fecha de inicio:</label>
+                            {% if fecha_inicio == "1900-01-01" %}
+                            <input type="date" id="fecha_inicio" name="fecha_inicio">
+                            {% else %}
+                            <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{fecha_inicio}}">
+                            {% endif %}
+                            
+                            <label for="fecha_termino">Fecha de termino:</label>
+                            {% if fecha_termino == "9999-12-31" %}
+                            <input type="date" id="fecha_termino" name="fecha_termino">
+                            {% else %}
+                            <input type="date" id="fecha_termino" name="fecha_termino" value="{{fecha_termino}}">
+                            {% endif %}
+                            <button type="submit">Filtrar</button>
+                        </form>
+
                         <div class="col d-inline-flex justify-content-lg-end">
                             <label for="categoriaEscoger" class="form-label pe-2">Categoría</label>
                             <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger">
@@ -96,6 +107,7 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                     {% for transaccion in transacciones %}
+                                    {% if transaccion.fecha|date:"Y-m-d" >= fecha_inicio and transaccion.fecha|date:"Y-m-d" <= fecha_termino %}
                                     <tr>
                                         <td>{{ transaccion.nombre }}</td>
                                         <td>{{ transaccion.fecha | date:"d-m-Y" }}</td>
@@ -122,6 +134,7 @@
                                         </button>
                                         </td>
                                     </tr>
+                                    {% endif %}
                                     {% endfor %}
                                 </tbody>
                             </table>

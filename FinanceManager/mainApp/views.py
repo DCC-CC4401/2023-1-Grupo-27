@@ -16,7 +16,26 @@ def index(request):  # Metodo para la pagina principal
         transacciones = Transaccion.objects.filter(usuario=user.id).order_by('-fecha') # Obtener transacciones del usuario ordenadas por fecha descendiente
         saldo = saldo_usuario(user.id) # Obtener saldo del usuario
         categorias_form = agregar_categorias_form() # Para crear las categorias iterativamente al momento de cargar la pagina
-        return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo, "categorias_form": categorias_form}) # Cargamos la pagina con lo correspondiente
+        
+        # Obtenemos la fecha de inicio almacenada en la sesión
+        fecha_inicio = request.session.get("fecha_inicio", "1900-01-01")
+        fecha_termino = request.session.get("fecha_termino", "9999-12-31")
+
+        # Actualizamos la fecha de inicio en la sesión si se proporciona en la solicitud GET
+        if "fecha_inicio" in request.GET:
+            if request.GET.get("fecha_inicio") == "":   #Si se borra la fecha, se vuelve a la por defecto
+                fecha_inicio = "1900-01-01"
+            else:
+                fecha_inicio = request.GET["fecha_inicio"]  #obtenemos la fecha ingresada
+            request.session["fecha_inicio"] = fecha_inicio  #Guardamos la fecha ingresada en la sesion
+        if "fecha_termino" in request.GET:
+            if request.GET.get("fecha_termino") == "":  #Si se borra la fecha, se vuelve a la por defecto
+                fecha_termino = "9999-12-31"
+            else:
+                fecha_termino=request.GET["fecha_termino"]  #obtenemos la fecha ingresada
+            request.session["fecha_termino"] = fecha_termino    #Guardamos la fecha ingresada en la sesion
+        
+        return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo, "categorias_form": categorias_form, "fecha_inicio":fecha_inicio, "fecha_termino":fecha_termino}) # Cargamos la pagina con lo correspondiente
     if request.method == "POST": # Se envía un formulario desde la pagina
         if "ingreso" in request.POST or "egreso" in request.POST: # Estamos recibiendo un post del modal de ingreso o egreso
             tipo = "Ingreso" if "ingreso" in request.POST else "Egreso" # Diferenciamos caso entre ingreso o egreso

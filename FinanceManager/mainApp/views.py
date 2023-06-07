@@ -36,6 +36,7 @@ def index(request):  # Metodo para la pagina principal
             request.session["fecha_termino"] = fecha_termino    #Guardamos la fecha ingresada en la sesion
         
         return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo, "categorias_form": categorias_form, "fecha_inicio":fecha_inicio, "fecha_termino":fecha_termino}) # Cargamos la pagina con lo correspondiente
+    
     if request.method == "POST": # Se envía un formulario desde la pagina
         if "ingreso" in request.POST or "egreso" in request.POST: # Estamos recibiendo un post del modal de ingreso o egreso
             tipo = "Ingreso" if "ingreso" in request.POST else "Egreso" # Diferenciamos caso entre ingreso o egreso
@@ -89,7 +90,7 @@ def register_user(request): # Metodo para registrar al usuario
             #Redireccionar la página /index
             return HttpResponseRedirect('/mainApp')
         except IntegrityError: # Caso en que el usuario con tal nombre ya exista, recargamos la pagina
-            return HttpResponseRedirect('.')
+            return render(request, 'register_user.html', {'errorRegistro': 'Precaución, el nombre de usuario no es válido. Intentelo denuevo.'})
 
 
 def login_user(request): # Metodo para hacer login a un usuario
@@ -103,7 +104,8 @@ def login_user(request): # Metodo para hacer login a un usuario
             login(request,usuario) # Se logea el usuario
             return HttpResponseRedirect('../mainApp') # Ingresamos a la pagina principal
         else: # Caso contrario debe registrarse, o bien se equivoco al ingresar datos
-            return HttpResponseRedirect('/login') # Recargamos la pagina
+            return render(request, './login.html', {'errorInicio': 'Precaución, usuario o contraseña invalida. Porfavor intentelo denuevo.'})
+            #return HttpResponseRedirect('/login') # Recargamos la pagina
         
 def logout_user(request): # Metodo para hacer logout de un user
     logout(request) # Hacemos logout del usuario

@@ -36,19 +36,26 @@
           </nav>
 
         <!-- Start of BOX -->
-
         <div class="container my-2 text-center" id="box">
                 <div class="box p-5 py-4">
                     <form method="post" >
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="nombre_usuario">Nombre</label>
+                            <h4><label for="nombre_usuario">Nombre de usuario</label></h4>
                             <input type="text" class="form-control" id=nombre_usuario name="username" autofocus required>
                         </div>
+                
+                        <br></br>
+
                         <div class="form-group pb-4">
-                            <label for="contraseña">Contraseña</label>
+                            <h4><label for="contraseña">Contraseña</label></h4>
                             <input type="password" class="form-control" id="contraseña" name="contraseña" required>
                         </div>
+                        {% if errorInicio %}
+                            <div class="boxError">
+                                <h5><p class="red_text">{{ errorInicio }}</p></h5>
+                            </div>
+                        {% endif %}
                         <button class="btn btn-primary" type="submit">Iniciar sesión</button>
                     </form>
                 </div>

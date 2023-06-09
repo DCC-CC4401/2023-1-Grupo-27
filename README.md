@@ -8,7 +8,7 @@ Finance Manager es una página web que ayuda a ordenar las finanzas de un usuari
 + Ver tu saldo disponible.
 + Asignar categorias a tus ingresos/egresos.
 + (To Be Implemented) Listar tus ingresos/egresos por categoria.
-+ (To Be Implemented) Listar tus ingresos/egresos en un rango de fechas.
++ Listar tus ingresos/egresos en un rango de fechas.
 
 ## Modelo ER
 

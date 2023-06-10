@@ -35,7 +35,18 @@ def index(request):  # Metodo para la pagina principal
                 fecha_termino=request.GET["fecha_termino"]  #obtenemos la fecha ingresada
             request.session["fecha_termino"] = fecha_termino    #Guardamos la fecha ingresada en la sesion
         
-        return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo, "categorias_form": categorias_form, "fecha_inicio":fecha_inicio, "fecha_termino":fecha_termino}) # Cargamos la pagina con lo correspondiente
+        #Obtenemos el filtro guardado en la sesion
+        filtercat = request.session.get("categoriaEscoger", "")
+        
+        # Actualizamos el filtro de categoria en la sesión si se proporciona en la solicitud GET
+        if "categoriaEscoger" in request.GET:
+            if request.GET.get("categoriaEscoger") == "":   #Si se elimina el filtro, se vuelve a un valor por defecto
+                filtercat = ""
+            else:
+                filtercat = request.GET["categoriaEscoger"]  #obtenemos el filtro ingresado
+            request.session["categoriaEscoger"] = filtercat  #Guardamos el filtro en la sesion
+
+        return render(request, "index.html", {"transacciones": transacciones, "user": user, "saldo": saldo, "categorias_form": categorias_form, "fecha_inicio":fecha_inicio, "fecha_termino":fecha_termino, "filtercat":filtercat}) # Cargamos la pagina con lo correspondiente
     
     if request.method == "POST": # Se envía un formulario desde la pagina
         if "ingreso" in request.POST or "egreso" in request.POST: # Estamos recibiendo un post del modal de ingreso o egreso
@@ -133,7 +144,7 @@ def agregar_categorias_form():
         "Familia",
         "Supermercado",
         "Regalos",
-        "Educación",
+        "Educacion",
         "Salidas",
         "Hogar",
         "Salud",

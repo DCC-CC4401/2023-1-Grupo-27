@@ -67,31 +67,50 @@
                 </div>
                 <div class="row border border-dark border-1 main_background main_container2">
                     <div class="row py-2 border border-dark border-1 py-3 main_background">
-                        <form method="get" action="">
-                            <label for="fecha_inicio">Fecha de inicio:</label>
-                            {% if fecha_inicio == "1900-01-01" %}
-                            <input type="date" id="fecha_inicio" name="fecha_inicio">
-                            {% else %}
-                            <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{fecha_inicio}}">
-                            {% endif %}
-                            
-                            <label for="fecha_termino">Fecha de termino:</label>
-                            {% if fecha_termino == "9999-12-31" %}
-                            <input type="date" id="fecha_termino" name="fecha_termino">
-                            {% else %}
-                            <input type="date" id="fecha_termino" name="fecha_termino" value="{{fecha_termino}}">
-                            {% endif %}
-                            <button type="submit">Filtrar</button>
-                        </form>
-
+                        <div class="col d-inline-flex justify-content-between" style="flex-grow: 2;">
+                            <form method="get" action="">
+                                <label for="fecha_inicio">Fecha de inicio:</label>
+                                {% if fecha_inicio == "1900-01-01" %}
+                                <input type="date" id="fecha_inicio" name="fecha_inicio">
+                                {% else %}
+                                <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{fecha_inicio}}">
+                                {% endif %}
+                                
+                                <label for="fecha_termino">Fecha de termino:</label>
+                                {% if fecha_termino == "9999-12-31" %}
+                                <input type="date" id="fecha_termino" name="fecha_termino">
+                                {% else %}
+                                <input type="date" id="fecha_termino" name="fecha_termino" value="{{fecha_termino}}">
+                                {% endif %}
+                                <button type="submit">Filtrar</button>
+                            </form>
+                        </div>
+                        
                         <div class="col d-inline-flex justify-content-lg-end">
-                            <label for="categoriaEscoger" class="form-label pe-2">Categoría</label>
-                            <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger">
-                                <option value="''">Escoger</option>
-                                <option value="CategoriaUno">One</option>
-                                <option value="CategoriaDos">Two</option>
-                                <option value="CategoriaTres">Three</option>
-                            </select>
+                            <form method="get" action="">
+                                <label for="categoriaEscoger" class="form-label pe-2">Categoría</label>
+                                <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger" name="categoriaEscoger" onchange="this.form.submit()">
+                                    {% if filtercat == "" %}
+                                    <option value="" selected>-----</option>
+                                    {% else %}
+                                    <option value="">-----</option>
+                                    {% endif %}
+
+                                    {% for categoria in categorias_form %}
+                                    {% if categoria == filtercat %}
+                                    <option value="{{categoria}}" selected>{{categoria}}</option>
+                                    {% else %}
+                                    <option value="{{categoria}}">{{categoria}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if filtercat == "SinCat" %}
+                                    <option value="SinCat" selected>Sin categoria</option>
+                                    {% else %}
+                                    <option value="SinCat">Sin categoria</option>
+                                    {% endif %}
+                                </select>
+                            </form>
                         </div>
                     </div>
                     <div class="row border border-dark border-1 py-2 main_background">
@@ -107,6 +126,7 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                     {% for transaccion in transacciones %}
+                                    {% if filtercat == "" or filtercat == transaccion.categoria or filtercat == "SinCat" and transaccion.categoria == "" %}
                                     {% if transaccion.fecha|date:"Y-m-d" >= fecha_inicio and transaccion.fecha|date:"Y-m-d" <= fecha_termino %}
                                     <tr>
                                         <td>{{ transaccion.nombre }}</td>
@@ -134,6 +154,7 @@
                                         </button>
                                         </td>
                                     </tr>
+                                    {% endif %}
                                     {% endif %}
                                     {% endfor %}
                                 </tbody>

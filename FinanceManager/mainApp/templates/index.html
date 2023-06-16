@@ -108,34 +108,42 @@
                                 </div>
                             </form>
                         </div>
-
+                        
+                        <!-- Filtro categoria -->
                         <div class="col d-inline-flex justify-content-lg-end">
-                            <form method="get" action="">
-                                <label for="categoriaEscoger" class="form-label pe-2">Categoría</label>
-                                <select class="form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger" name="categoriaEscoger" onchange="this.form.submit()">
-                                    {% if filtercat == "" %}
-                                    <option value="" selected>-----</option>
-                                    {% else %}
-                                    <option value="">-----</option>
-                                    {% endif %}
-
-                                    {% for categoria in categorias_form %}
-                                    {% if categoria == filtercat %}
-                                    <option value="{{categoria}}" selected>{{categoria}}</option>
-                                    {% else %}
-                                    <option value="{{categoria}}">{{categoria}}</option>
-                                    {% endif %}
-                                    {% endfor %}
-                                    
-                                    {% if filtercat == "SinCat" %}
-                                    <option value="SinCat" selected>Sin categoria</option>
-                                    {% else %}
-                                    <option value="SinCat">Sin categoria</option>
-                                    {% endif %}
-                                </select>
+                            <form method="get" action="" class="row g-2 align-items-center">
+                                <div class="col-auto">
+                                    <label for="categoriaEscoger" class="form-label col-lg-auto pe-2">
+                                        Categoría
+                                    </label>
+                                </div>
+                                <div class="col-lg-auto">
+                                    <select class="form-select form-select-sm" aria-label="categoriaEscoger" id="categoriaEscoger" name="categoriaEscoger" onchange="this.form.submit()">
+                                        {% if filtercat == "" %}
+                                        <option value="" selected>-----</option>
+                                        {% else %}
+                                        <option value="">-----</option>
+                                        {% endif %}
+                        
+                                        {% for categoria in categorias_form %}
+                                        {% if categoria == filtercat %}
+                                        <option value="{{categoria}}" selected>{{categoria}}</option>
+                                        {% else %}
+                                        <option value="{{categoria}}">{{categoria}}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                        
+                                        {% if filtercat == "SinCat" %}
+                                        <option value="SinCat" selected>Sin categoria</option>
+                                        {% else %}
+                                        <option value="SinCat">Sin categoria</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
                             </form>
-                        </div>
+                        </div>                        
                     </div>
+
                     <div class="row border border-dark border-1 py-2 main_background">
                         <div class="table-responsive-md">
                             <table class="table table-hover align-text-top">

@@ -78,25 +78,37 @@
                 </div>
                 <div class="row border border-dark border-1 main_background main_container2">
                     <div class="row py-2 border border-dark border-1 py-3 main_background">
+                        <!-- Filtro fechas -->
                         <div class="col d-inline-flex justify-content-between" style="flex-grow: 2;">
-                            <form method="get" action="">
-                                <label for="fecha_inicio">Fecha de inicio:</label>
-                                {% if fecha_inicio == "1900-01-01" %}
-                                <input type="date" id="fecha_inicio" name="fecha_inicio">
-                                {% else %}
-                                <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{fecha_inicio}}">
-                                {% endif %}
-                                
-                                <label for="fecha_termino">Fecha de termino:</label>
-                                {% if fecha_termino == "9999-12-31" %}
-                                <input type="date" id="fecha_termino" name="fecha_termino">
-                                {% else %}
-                                <input type="date" id="fecha_termino" name="fecha_termino" value="{{fecha_termino}}">
-                                {% endif %}
-                                <button type="submit">Filtrar</button>
+                            <form method="get" action="" class="row g-2 align-items-center">
+                                <div class="col-auto">
+                                    <label for="fecha_inicio" class="col-form-label">Fecha de inicio:</label>
+                                </div>
+                                <div class="col-auto">
+                                    {% if fecha_inicio == "1900-01-01" %}
+                                    <input type="date" class="form-control form-control-sm" id="fecha_inicio" name="fecha_inicio">
+                                    {% else %}
+                                    <input type="date" class="form-control form-control-sm" id="fecha_inicio" name="fecha_inicio" value="{{fecha_inicio}}">
+                                    {% endif %}
+                                </div>
+                                <div class="w-100 d-xl-none"></div> <!-- Adds a line break on screens smaller than medium -->
+                                <div class="col-auto">
+                                    <label for="fecha_termino" class="col-form-label">Fecha de termino:</label>
+                                </div>
+                                <div class="col-auto">
+                                    {% if fecha_termino == "9999-12-31" %}
+                                    <input type="date" class="form-control form-control-sm" id="fecha_termino" name="fecha_termino">
+                                    {% else %}
+                                    <input type="date" class="form-control form-control-sm" id="fecha_termino" name="fecha_termino" value="{{fecha_termino}}">
+                                    {% endif %}
+                                </div>
+                                <div class="w-100 d-md-none"></div> <!-- Adds a line break on screens smaller than medium -->
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-sm btn-secondary">Filtrar</button>
+                                </div>
                             </form>
                         </div>
-                        
+
                         <div class="col d-inline-flex justify-content-lg-end">
                             <form method="get" action="">
                                 <label for="categoriaEscoger" class="form-label pe-2">Categoría</label>

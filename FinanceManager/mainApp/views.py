@@ -9,6 +9,10 @@ from .models import Transaccion
 from django.shortcuts import render, get_object_or_404
 from django.template.defaulttags import register
 from django.contrib.humanize.templatetags.humanize import intcomma
+import csv
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
 
 def index(request):  # Metodo para la pagina principal
     if request.method == "GET": # Se esta cargando la pagina
@@ -151,3 +155,25 @@ def agregar_categorias_form():
         "Otro"
     )
     return CATEGORIAS
+
+@login_required
+def exportar_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="transacciones.csv"'
+    writer = csv.writer(response) # Se crea el escritor de CSV
+    usuario = request.user  # Obtener el usuario logeado
+    datos = Transaccion.objects.filter(usuario=usuario)  # Filtrar los datos por usuario
+
+    # Obtener los nombres de las columnas
+    columnas = [field.name for field in Transaccion._meta.get_fields() if field.concrete]
+
+    # Eliminamos la columna 'usuario'
+    columna_eliminar = 'usuario'
+    if columna_eliminar in columnas:
+        columnas.remove(columna_eliminar)
+
+    writer.writerow(columnas)  # Escribimos los encabezados de las columnas
+    for dato in datos:
+        fila = model_to_dict(dato, fields=list(columnas))  # Convertir el objeto en un diccionario
+        writer.writerow(fila.values())  # Escribir los valores en el archivo CSV
+    return response

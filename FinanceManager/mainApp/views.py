@@ -119,7 +119,7 @@ def login_user(request): # Metodo para hacer login a un usuario
             login(request,usuario) # Se logea el usuario
             return HttpResponseRedirect('../mainApp') # Ingresamos a la pagina principal
         else: # Caso contrario debe registrarse, o bien se equivoco al ingresar datos
-            return render(request, './login.html', {'errorInicio': 'Precaución, usuario o contraseña invalida. Porfavor intentelo denuevo.'})
+            return render(request, './login.html', {'errorInicio': True})
             #return HttpResponseRedirect('/login') # Recargamos la pagina
         
 def logout_user(request): # Metodo para hacer logout de un user

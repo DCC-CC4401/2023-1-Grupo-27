@@ -1,21 +1,59 @@
 /* Main */
+body {
+    background: linear-gradient(to bottom, #335c67 350px, #fff 200px);;
+    background-repeat: no-repeat;
+    background-size: 100% 50%;
+}
+
+.bg-light {
+    background: transparent !important;
+}
+
+.navbar-brand {
+    color: #fff;
+}
+
+.navbar-brand:hover {
+    color: #fff;
+}
+
+.navbar-toggler {
+    background-color: #fff;
+}
 
 .box {
-    background-color: lightblue;
+    position: relative;
+    border: 1px solid #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.877);
+    color: #1c1c1c;
     min-height: 50px;
+    margin-top: 3rem;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.form-control {
+    border: 1px solid #1c1c1c;
 }
 
 .border-dark{
     margin: auto;
-    border-color: #7c7c7c !important;
+    border-color: #1c1c1c !important;
 }
 
 .main_background{
-    background-color: #d1d1d1 !important;
+    background-color: #fff !important;
+    color: #111 !important;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.568);
 }
 
 .user_saldo{
-    margin: auto; font-size: xx-large;
+    backdrop-filter: inherit !important;
+    background: inherit !important;
+    margin: auto; 
+    font-size: xx-large;
+    box-shadow: 0 0 15px 0 #fff
 }
 
 .main_container2{
@@ -41,43 +79,44 @@
 }
 
 .modificar-btn{
-    background-color: #F7B538 !important;
-    border-color: #F7B538 !important;
+    background-color: #335c67 !important;
+    border-color: #335c67 !important;
 }
 
 .modificar-btn:hover{
-    background-color: #f9c86a !important;
-    border-color: #f9c86a !important;
+    background-color: #2c4f58 !important;
+    border-color: #2c4f58 !important;
 }
 
 .btn-primary{
-    background-color: #258EA6 !important;
-    border-color: #258EA6 !important;
+    background-color: #F18E3D !important;
+    border-color: #1c1c1c !important;
 }
 
 .btn-primary:hover{
-    background-color: #4abcd7 !important;
-    border-color: #4abcd7 !important;
+    background-color: #fff !important;
+    border-color: #F18E3D !important;
+    color: #111;
 }
 
 .btn-success{
-    background-color: #47b92e !important;
-    border-color: #47b92e !important;
+    background-color: #2D5A2C !important;
+    border-color: #2D5A2C !important;
 }
 
 .btn-success:hover{
-    background-color: #29dd00 !important;
-    border-color: #29dd00 !important;
+    background-color: #274e26 !important;
+    border-color: #274e26 !important;
 }
 
 .btn-danger{
-    background-color: #e11933 !important;
-    border-color: #e11933 !important;
+    background-color: #D5392F  !important;
+    border-color: #D5392F  !important;
 }
 
 .btn-danger:hover{
-    background-color: #ff1313 !important;
-    border-color: #ff1313 !important;
+    background-color: #b32f25 !important;
+    border-color: #b32f25 !important;
 }
 
 /* Text colors */
@@ -96,15 +135,15 @@
 
 /* Pagina Inicio */
 
-.cuerpo-inicio{
+.cuerpo-inicio {
     font-family: 'Montserrat', sans-serif;
     height: 100%;
     width: 100%;
     min-height: 100vh;
     position: relative;
     display: grid;
-    color: white;
-    background-color: #F18E3D;
+    color: #1c1c1c;
+    background-image: linear-gradient(to bottom, transparent 250px, #fff 200px);
 }
 
 section{
@@ -113,7 +152,7 @@ section{
 
 .container-text {
     background-clip: border-box;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #1c1c1c;
     padding-top: 60px;
     padding-bottom: 60px;
     display: block;
@@ -136,6 +175,7 @@ section{
     line-height: 1.9;
     margin: 0 0 40px;
     text-align: center;
+    color: #fff;
 }
 
 .information {

@@ -71,7 +71,7 @@ def index(request):  # Metodo para la pagina principal
             if request.user == transaccion.usuario: #Se confirma que el usuario actual sea el dueño de la transaccion que se quiere modificar
                 if request.POST["titulo"] != "": #Confirmamos que se haya escrito algo en la casilla de nuevo titulo
                     transaccion.nombre = request.POST["titulo"] #Reemplazamos el titulo actual por el nuevo titulo ingresado
-                if request.POST["categoria"] != "": #Confirmamos que se haya escrito algo en la casilla de nueva categoria
+                if request.POST["categoria"] != "sinCambios": #Confirmamos que se haya escrito algo en la casilla de nueva categoria
                     transaccion.categoria = request.POST["categoria"] #Reemplazamos la categoria actual por la nueva categoria ingresada
                 if request.POST["monto"] != "": #Confirmamos que se haya escrito algo en la casilla de nuevo monto
                     transaccion.monto = request.POST["monto"] #Reemplazamos el monto actual por el nuevo monto ingresado

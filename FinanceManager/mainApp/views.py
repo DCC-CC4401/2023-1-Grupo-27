@@ -135,9 +135,10 @@ def saldo_usuario(id_usuario): # Metodo para conseguir el saldo de un usuario
         saldo = 0
     return saldo # Devolvemos el saldo del usuario
 
+# Filtro para agregar separador de miles
 @register.filter
 def intdot(value):
-    return intcomma(value).replace(",", ".")
+    return intcomma(value).replace(",", ".") # Usamos el filtro intcomma, pero cambiamos las comas por puntos para el formato latinoamericano
 
 # Categorias para transacciones
 def agregar_categorias_form():

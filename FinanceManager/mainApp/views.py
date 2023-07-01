@@ -105,7 +105,7 @@ def register_user(request): # Metodo para registrar al usuario
             #Redireccionar la página /index
             return HttpResponseRedirect('/mainApp')
         except IntegrityError: # Caso en que el usuario con tal nombre ya exista, recargamos la pagina
-            return render(request, 'register_user.html', {'errorRegistro': 'Precaución, el nombre de usuario no es válido. Intentelo denuevo.'})
+            return render(request, 'register_user.html', {'errorRegistro': True})
 
 
 def login_user(request): # Metodo para hacer login a un usuario
@@ -120,7 +120,6 @@ def login_user(request): # Metodo para hacer login a un usuario
             return HttpResponseRedirect('../mainApp') # Ingresamos a la pagina principal
         else: # Caso contrario debe registrarse, o bien se equivoco al ingresar datos
             return render(request, './login.html', {'errorInicio': True})
-            #return HttpResponseRedirect('/login') # Recargamos la pagina
         
 def logout_user(request): # Metodo para hacer logout de un user
     logout(request) # Hacemos logout del usuario

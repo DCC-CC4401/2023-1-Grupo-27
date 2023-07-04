@@ -1,6 +1,6 @@
 /* Main */
 body {
-    background: linear-gradient(to bottom, #335c67 350px, #fff 200px);;
+    background: linear-gradient(to bottom, #335c67 350px, #fff 200px);
     background-repeat: no-repeat;
     background-size: 100% 50%;
 }
@@ -252,7 +252,76 @@ section{
     margin-right: auto;
     background-color: transparent;
     background-clip: padding-box;
+    border: 2px solid #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.6);
 }
+
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-footer {
+    margin-left: 20px;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.logo-footer {
+    height: 60px;
+    display: flex;
+}
+
+.logo-footer p {
+    margin-top: 13px;
+    margin-left: 5px;
+    color: #1c1c1c;
+}
+
+.left-footer ul {
+    margin-top: 20px;
+    margin-left: -32px;
+    flex-wrap: wrap;
+}
+
+.left-footer li {
+    display: inline;
+    color: #1c1c1c;
+    font-size: 13px;
+    margin: 0;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+
+.left-footer li a:hover {
+    border-bottom: 1px solid #1c1c1c;
+    cursor: pointer;
+}
+
+.right-footer {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.right-footer > img {
+    width: 30px;
+    height: 30px;
+    padding-left: 10px;
+    transition: scale 0.2s ease-in-out;
+}
+
+.right-footer > img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+
 
 @media (max-width: 1280px) {
 .container-text {
@@ -262,4 +331,15 @@ section{
 .app-img {
     width: 100%;
 }
+}
+
+@media (max-width: 1200px) {
+    .left-footer li {
+        display: block;
+        padding-bottom: 10px;
+    }
+    .right-footer img {
+        display: block;
+        padding-bottom: 10px;
+    }
 }

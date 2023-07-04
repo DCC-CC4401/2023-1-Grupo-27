@@ -171,6 +171,10 @@ def exportar_csv(request):
     columna_eliminar = 'usuario'
     if columna_eliminar in columnas:
         columnas.remove(columna_eliminar)
+    # Eliminamos la columna 'id'
+    columna_eliminar = 'id'
+    if columna_eliminar in columnas:
+        columnas.remove(columna_eliminar)
 
     writer.writerow(columnas)  # Escribimos los encabezados de las columnas
     for dato in datos:
